@@ -4,6 +4,12 @@ const express = require("express");
 const { default: helmet } = require("helmet");
 const morgan = require("morgan");
 const { checkOverload } = require("./helpers/check.connect");
+
+// test common-lib
+const { NotificationCategory, Utils } = require("common-lib");
+console.log(Utils.HandleErrorDetail);
+//
+
 const app = express();
 
 app.use(morgan("dev"));
