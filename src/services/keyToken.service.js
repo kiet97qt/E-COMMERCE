@@ -2,7 +2,13 @@
 const keytokenModel = require("../models/keytoken.model");
 const { Types } = require("mongoose");
 class KeyTokenService {
-  static createKeyToken = async ({ userId, publicKey, refreshToken }) => {
+  static createKeyToken = async ({
+    userId,
+    publicKey,
+    privateKey,
+    refreshToken,
+    refreshTokenUsed = null,
+  }) => {
     try {
       //lv0
       // const publicKeyString = publicKey.toString();
@@ -15,7 +21,8 @@ class KeyTokenService {
       const filter = { user: userId },
         update = {
           publicKey,
-          refreshTokensUsed: [],
+          privateKey,
+          refreshTokensUsed: refreshTokenUsed ? [refreshTokenUsed] : [],
           refreshToken,
         },
         options = {
@@ -43,6 +50,38 @@ class KeyTokenService {
 
   static removeKeyById = async (id) => {
     return await keytokenModel.deleteOne({ _id: id });
+  };
+
+  static findByRefreshTokenUsed = async (refreshToken) => {
+    return await keytokenModel
+      .findOne({ refreshTokensUsed: refreshToken })
+      .lean();
+  };
+
+  static findByRefreshToken = async (refreshToken) => {
+    return await keytokenModel.findOne({ refreshToken }).lean();
+  };
+
+  static removeKeyByUserId = async (userId) => {
+    return await keytokenModel.deleteOne({ user: userId });
+  };
+
+  static updateRefreshToken = async ({
+    userId,
+    refreshToken,
+    refreshTokensUsed,
+  }) => {
+    return await keytokenModel.updateOne(
+      { user: userId },
+      {
+        $set: {
+          refreshToken,
+        },
+        $addToSet: {
+          refreshTokensUsed,
+        },
+      }
+    );
   };
 }
 
