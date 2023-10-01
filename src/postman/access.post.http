@@ -26,9 +26,8 @@ x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd0601544
 POST {{url_dev}}/shop/logout
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6518732c8a6d18e4632c55c4
+x-client-id: 6519c6772c83a181045432ee
 authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE4NzMyYzhhNmQxOGU0NjMyYzU1YzQiLCJlbWFpbCI6InNob3B0aXBqc0BnbWFpbC5jb20iLCJpYXQiOjE2OTYxNjA0ODgsImV4cCI6MTY5NjMzMzI4OH0.5YY9p3J2Ea4mMje8Oo0t5m8XoWTjcjC1HQVnOiEa-bY
-x-rtoken-id: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE4NzMyYzhhNmQxOGU0NjMyYzU1YzQiLCJlbWFpbCI6InNob3B0aXBqc0BnbWFpbC5jb20iLCJpYXQiOjE2OTYxNjAyMTUsImV4cCI6MTY5Njc2NTAxNX0.I3MTWj8_dmlVSHuph0vOty8YIfPArC0LSAzjHnKajME
 
 {}
 
@@ -36,7 +35,28 @@ x-rtoken-id: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE4NzMyYzhhNm
 POST {{url_dev}}/shop/handlerRefreshToken
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6518732c8a6d18e4632c55c4
+x-client-id: 6519c6772c83a181045432ee
 x-rtoken-id: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE4NzMyYzhhNmQxOGU0NjMyYzU1YzQiLCJlbWFpbCI6InNob3B0aXBqc0BnbWFpbC5jb20iLCJpYXQiOjE2OTYxNjA4MTIsImV4cCI6MTY5Njc2NTYxMn0.KU_8hqcNRZbcR-PAN6izsoydcZYN93N0zUZb4phMJIE
 
 {}
+
+### create product
+POST {{url_dev}}/product
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+x-client-id: 6519c6772c83a181045432ee
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5YzY3NzJjODNhMTgxMDQ1NDMyZWUiLCJlbWFpbCI6InNob3B0aXBqc0BnbWFpbC5jb20iLCJpYXQiOjE2OTYxODgwMjMsImV4cCI6MTY5NjM2MDgyM30.s5Z_43n-ojdS2GJ39ww55niJX7kPwEn1aWzrCwRJDFY
+
+{
+    "product_name" : "Furniture 15 64GB",
+    "product_thumb": "product_thumb",
+    "product_description": "New Product",
+    "product_price": 500,
+    "product_type": "Furniture",
+    "product_quantity": 23,
+    "product_attributes": {
+        "brand" : "TTF",
+        "size": "15",
+        "material": "Gold"
+    }
+}
