@@ -92,7 +92,7 @@ authorization: {{accessToken}}
 }
 
 ### declare variable
-@product_id = 651c6636f91af821859072f2
+@product_id = 651effebced077f5cb187360
 ### publish product by shop
 # @name publishProductByShop
 POST {{url_dev}}/product/publish/{{product_id}}
@@ -137,9 +137,25 @@ x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd0601544
 
 ### findOne product
 # @name findAllProducts
-GET {{url_dev}}/product/651c54f81cb7df5b67597e13
+GET {{url_dev}}/product/651effebced077f5cb187360
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
 
 {
+}
+
+### update partial product
+# @name updatePartialProduct
+PATCH {{url_dev}}/product/651effebced077f5cb187360
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+x-client-id: 6519c6772c83a181045432ee
+authorization: {{accessToken}}
+
+{
+    "product_name": "Furniture 16 64GB",
+    "product_attributes": {
+      "size": "13"
+    },
+    "product_type": "Furniture"
 }

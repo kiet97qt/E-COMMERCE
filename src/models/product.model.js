@@ -19,7 +19,7 @@ const productSchema = new Schema(
       enum: ["Electronics", "Clothing", "Furniture"],
     },
     product_shop: { type: Schema.Types.ObjectId, ref: "Shop" },
-    product_quantity: { type: Schema.Types.Mixed, required: true },
+    product_attributes: { type: Schema.Types.Mixed, required: true },
     // more
     product_ratingsAverage: {
       type: Number,

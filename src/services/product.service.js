@@ -16,7 +16,9 @@ const {
   searchProductByUser,
   findAllProducts,
   findProduct,
+  updateProductById,
 } = require("../models/repositories/product.repo");
+const { removeUndefinedObject, updateNestedObjectParser } = require("../utils");
 //define Factory class to create product
 
 class ProductFactory {
@@ -33,11 +35,11 @@ class ProductFactory {
     return new productClass(payload).createProduct();
   }
 
-  static async updateProduct(type, payload) {
+  static async updateProduct(type, productId, payload) {
     const productClass = ProductFactory.productRegistry[type];
     if (!productClass)
       throw new BadRequestError(`Invalid Product Types ${type}`);
-    return new productClass(payload).createProduct();
+    return new productClass(payload).updateProduct(productId);
   }
 
   static async publishProductByShop({ product_shop, product_id }) {
@@ -118,6 +120,10 @@ class Product {
   async createProduct(product_id) {
     return await product.create({ ...this, _id: product_id });
   }
+
+  async updateProduct(product_id, bodyUpdate) {
+    return await updateProductById({ product_id, bodyUpdate, model: product });
+  }
 }
 
 // Define sub-class for different product types Clothing
@@ -131,6 +137,22 @@ class Clothing extends Product {
     const newProduct = await super.createProduct(newClothing._id);
     if (!newProduct) throw new BadRequestError("create new Product error");
     return newProduct;
+  }
+
+  async updateProduct(productId) {
+    const objectParams = removeUndefinedObject(this);
+    if (objectParams.product_attributes) {
+      await updateProductById({
+        productId,
+        bodyUpdate: updateNestedObjectParser(objectParams.product_attributes),
+        model: clothing,
+      });
+    }
+    const updateProduct = await super.updateProduct(
+      productId,
+      updateNestedObjectParser(objectParams)
+    );
+    return updateProduct;
   }
 }
 
@@ -161,6 +183,22 @@ class Furniture extends Product {
     const newProduct = await super.createProduct(newFurniture._id);
     if (!newProduct) throw new BadRequestError("create new Product error");
     return newProduct;
+  }
+
+  async updateProduct(productId) {
+    const objectParams = removeUndefinedObject(this);
+    if (objectParams.product_attributes) {
+      await updateProductById({
+        productId,
+        bodyUpdate: updateNestedObjectParser(objectParams.product_attributes),
+        model: furniture,
+      });
+    }
+    const updateProduct = await super.updateProduct(
+      productId,
+      updateNestedObjectParser(objectParams)
+    );
+    return updateProduct;
   }
 }
 
