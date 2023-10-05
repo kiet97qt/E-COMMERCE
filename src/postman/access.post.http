@@ -125,3 +125,21 @@ authorization: {{accessToken}}
 
 {
 }
+
+### findall product
+# @name findAllProducts
+GET {{url_dev}}/product
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+
+{
+}
+
+### findOne product
+# @name findAllProducts
+GET {{url_dev}}/product/651c54f81cb7df5b67597e13
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+
+{
+}
