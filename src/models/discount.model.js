@@ -22,6 +22,10 @@ const discountSchema = new Schema(
       type: Number,
       required: true,
     },
+    discount_max_value: {
+      type: Number,
+      required: true,
+    },
     discount_code: {
       type: String,
       required: true,
@@ -77,5 +81,5 @@ const discountSchema = new Schema(
 
 //Export the model
 module.exports = {
-  inventory: model(DOCUMENT_NAME, inventorySchema),
+  discount: model(DOCUMENT_NAME, discountSchema),
 };

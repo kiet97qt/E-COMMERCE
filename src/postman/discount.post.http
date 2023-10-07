@@ -49,59 +49,50 @@ x-rtoken-id: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5YzY3NzJjOD
 
 ###
 ####################################################################################################################################################################################################################################
-#################################################  Product  ########################################################################################################################################################################
+#################################################  Discount  ########################################################################################################################################################################
 ####################################################################################################################################################################################################################################
 ###
 
-### create product
-# @name createProduct
-POST {{url_dev}}/product
+### create Discount Code
+# @name createDiscountCode
+POST {{url_dev}}/discount
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
 x-client-id: 6519c6772c83a181045432ee
 authorization: {{accessToken}}
 
 {
-    "product_name" : "Iphone 15 128GB",
-    "product_thumb": "product_thumb",
-    "product_description": "New Product",
-    "product_price": 500,
-    "product_type": "Furniture",
-    "product_quantity": 23,
-    "product_attributes": {
-        "brand" : "TTF",
-        "size": "15",
-        "material": "Gold"
-    }
+    "name": "name2",
+    "description": "description",
+    "type": "percentage",
+    "value": 10,
+    "max_value": 30000,
+    "code": "SHOP-1122",
+    "start_date": "2023-10-08 09:00:00",
+    "end_date": "2023-11-08 09:00:00",
+    "max_uses": 100,
+    "uses_count": 0,
+    "users_used": [],
+    "max_uses_per_user": 1,
+    "min_order_value": 200000,
+    "created_by": {},
+    "is_active": true,
+    "product_ids": ["65210e31443a6da4f8923318"],
+    "applies_to": "all"
 }
 
-### get all draft product
-# @name getAllDraftsForShop
-GET {{url_dev}}/product/drafts/all
+### get All Discount Codes With Products
+# @name getAllDiscountCodesWithProducts
+GET {{url_dev}}/discount/list_product_code?code=SHOP-1133&shopId=6519c6772c83a181045432ee&limit=50&page=1
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6519c6772c83a181045432ee
-authorization: {{accessToken}}
 
 {
 }
 
-### get all publish product
-# @name getAllPublishForShop
-GET {{url_dev}}/product/published/all
-Content-Type: application/json
-x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6519c6772c83a181045432ee
-authorization: {{accessToken}}
-
-{
-}
-
-### declare variable
-@product_id = 6521bc543dc805cd4f91d93e
-### publish product by shop
-# @name publishProductByShop
-POST {{url_dev}}/product/publish/{{product_id}}
+### get All Discount Codes
+# @name getAllDiscountCodes
+GET {{url_dev}}/discount?shopId=6519c6772c83a181045432ee&limit=50&page=1
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
 x-client-id: 6519c6772c83a181045432ee
@@ -110,58 +101,19 @@ authorization: {{accessToken}}
 {
 }
 
-### unPublish product by shop
-# @name unPublishProductByShop
-POST {{url_dev}}/product/unpublish/{{product_id}}
-Content-Type: application/json
-x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6519c6772c83a181045432ee
-authorization: {{accessToken}}
-
-{
-}
-
-### search product
-# @name getListSearchProduct
-GET {{url_dev}}/product/search/15
-Content-Type: application/json
-x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6519c6772c83a181045432ee
-authorization: {{accessToken}}
-
-{
-}
-
-### findall product
-# @name findAllProducts
-GET {{url_dev}}/product
+### get All Discount Codes
+# @name getAllDiscountCodes
+POST {{url_dev}}/discount/amount
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
 
 {
-}
-
-### findOne product
-# @name findAllProducts
-GET {{url_dev}}/product/651effebced077f5cb187360
-Content-Type: application/json
-x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-
-{
-}
-
-### update partial product
-# @name updatePartialProduct
-PATCH {{url_dev}}/product/651effebced077f5cb187360
-Content-Type: application/json
-x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6519c6772c83a181045432ee
-authorization: {{accessToken}}
-
-{
-    "product_name": "Furniture 16 64GB",
-    "product_attributes": {
-      "size": "13"
-    },
-    "product_type": "Furniture"
+    "codeId": "SHOP-1122",
+    "userId": "2",
+    "shopId": "6519c6772c83a181045432ee",
+    "products": [{
+        "productId": "65210e31443a6da4f8923318",
+        "quantity": 5,
+        "price": 120000
+    }]
 }
