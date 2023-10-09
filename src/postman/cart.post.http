@@ -1,0 +1,116 @@
+@url_dev=http://localhost:3052/v1/api
+
+### signup 
+# @name signup
+POST {{url_dev}}/shop/signup
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+
+{
+    "name": "Shop TIPS",
+    "email": "shoptipjs@gmail.com",
+    "password": "abc123"
+}
+
+### login 
+# @name login
+POST {{url_dev}}/shop/login
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+
+{
+    "email": "shoptipjs@gmail.com",
+    "password": "abc123",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE4NzMyYzhhNmQxOGU0NjMyYzU1YzQiLCJlbWFpbCI6InNob3B0aXBqc0BnbWFpbC5jb20iLCJpYXQiOjE2OTYxNjA3NDQsImV4cCI6MTY5Njc2NTU0NH0.C8xJY4FzQ7Bt-RiDE8yOS32OmRUTzae1mCT4b0ErTdw"
+}
+###
+@accessToken = {{login.response.body.metadata.tokens.accessToken}}
+@refreshToken = {{login.response.body.metadata.tokens.refreshToken}}
+
+### logout
+# @name logout
+POST {{url_dev}}/shop/logout
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+x-client-id: 6519c6772c83a181045432ee
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE4NzMyYzhhNmQxOGU0NjMyYzU1YzQiLCJlbWFpbCI6InNob3B0aXBqc0BnbWFpbC5jb20iLCJpYXQiOjE2OTYxNjA0ODgsImV4cCI6MTY5NjMzMzI4OH0.5YY9p3J2Ea4mMje8Oo0t5m8XoWTjcjC1HQVnOiEa-bY
+
+{}
+
+### handlerRefreshToken
+# @name handlerRefreshToken
+POST {{url_dev}}/shop/handlerRefreshToken
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+x-client-id: 6519c6772c83a181045432ee
+x-rtoken-id: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5YzY3NzJjODNhMTgxMDQ1NDMyZWUiLCJlbWFpbCI6InNob3B0aXBqc0BnbWFpbC5jb20iLCJpYXQiOjE2OTYyMzQ1OTcsImV4cCI6MTY5NjgzOTM5N30.HdtaNUufzbcejSKmN4V2FbK2gVtfyTT3QWpNY5EeL-o
+
+{}
+
+###
+####################################################################################################################################################################################################################################
+#################################################  Cart  ########################################################################################################################################################################
+####################################################################################################################################################################################################################################
+###
+
+### create new
+# @name addToCart
+POST {{url_dev}}/cart
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+
+{
+    "userId": 1001,
+    "product": {
+        "productId": "65210e31443a6da4f8923318",
+        "shopId": "6519c6772c83a181045432ee",
+        "quantity": 4,
+        "name": "Furniture",
+        "price": 100000
+    }
+}
+
+### delete item in cart
+# @name deleteItemInCart
+DELETE {{url_dev}}/cart
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+
+{
+    "userId": 1001,
+    "productId": "65210e31443a6da4f8923318"
+}
+
+### listToCart
+# @name listToCart
+GET {{url_dev}}/cart?userId=1001
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+
+{
+}
+
+### udpate
+# @name addToCart
+POST {{url_dev}}/cart/update
+Content-Type: application/json
+x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
+
+{
+    "userId": "1001",
+    "shop_order_ids": [
+      {
+        "shopId": "6519c6772c83a181045432ee",
+        "item_products": [
+          {
+            "quantity": 2,
+            "price":12345,
+            "shopId": "6519c6772c83a181045432ee",
+            "old_quantity": 7,
+            "productId": "65210e31443a6da4f8923318"
+          }
+        ],
+        "version": 2000
+      }
+    ]
+}

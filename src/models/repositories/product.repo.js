@@ -7,7 +7,11 @@ const {
   clothing,
   furniture,
 } = require("../product.model");
-const { getSelectData, unGetSelectData } = require("../../utils");
+const {
+  getSelectData,
+  unGetSelectData,
+  convertToObjectMongodb,
+} = require("../../utils");
 
 const findAllDraftsForShop = async ({ query, limit, skip }) => {
   return await queryProduct({ query, limit, skip });
@@ -108,6 +112,14 @@ const queryProduct = async ({ query, limit, skip }) => {
     .lean();
 };
 
+const getProductById = async (productId) => {
+  return await product
+    .findOne({
+      _id: convertToObjectMongodb(productId),
+    })
+    .lean();
+};
+
 module.exports = {
   findAllDraftsForShop,
   publishProductByShop,
@@ -117,4 +129,5 @@ module.exports = {
   findAllProducts,
   findProduct,
   updateProductById,
+  getProductById,
 };
