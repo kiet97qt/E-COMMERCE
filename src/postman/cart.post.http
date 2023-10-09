@@ -97,20 +97,20 @@ Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
 
 {
-    "userId": "1001",
-    "shop_order_ids": [
-      {
-        "shopId": "6519c6772c83a181045432ee",
-        "item_products": [
-          {
-            "quantity": 2,
-            "price":12345,
-            "shopId": "6519c6772c83a181045432ee",
-            "old_quantity": 7,
-            "productId": "65210e31443a6da4f8923318"
-          }
-        ],
-        "version": 2000
-      }
-    ]
+  "userId": "1001",
+  "shop_order_ids": [
+    {
+      "shopId": "6519c6772c83a181045432ee",
+      "item_products": [
+        {
+          "quantity": 2,
+          "price":12345,
+          "shopId": "6519c6772c83a181045432ee",
+          "old_quantity": 7,
+          "productId": "65210e31443a6da4f8923318"
+        }
+      ],
+      "version": 2000
+    }
+  ]
 }

@@ -7,8 +7,8 @@ Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
 
 {
-    "name": "Shop TIPS",
-    "email": "shoptipjs@gmail.com",
+    "name": "Shop TIPS 2",
+    "email": "shoptipjs2@gmail.com",
     "password": "abc123"
 }
 
@@ -19,7 +19,7 @@ Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
 
 {
-    "email": "shoptipjs@gmail.com",
+    "email": "shoptipjs2@gmail.com",
     "password": "abc123",
     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE4NzMyYzhhNmQxOGU0NjMyYzU1YzQiLCJlbWFpbCI6InNob3B0aXBqc0BnbWFpbC5jb20iLCJpYXQiOjE2OTYxNjA3NDQsImV4cCI6MTY5Njc2NTU0NH0.C8xJY4FzQ7Bt-RiDE8yOS32OmRUTzae1mCT4b0ErTdw"
 }
@@ -58,11 +58,11 @@ x-rtoken-id: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5YzY3NzJjOD
 POST {{url_dev}}/product
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6519c6772c83a181045432ee
+x-client-id: 652449fae10331a37dbb7e9e
 authorization: {{accessToken}}
 
 {
-    "product_name" : "Iphone 15 128GB",
+    "product_name" : "Samsung 17 128GB Shop 2",
     "product_thumb": "product_thumb",
     "product_description": "New Product",
     "product_price": 500,
@@ -80,7 +80,7 @@ authorization: {{accessToken}}
 GET {{url_dev}}/product/drafts/all
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6519c6772c83a181045432ee
+x-client-id: 652449fae10331a37dbb7e9e
 authorization: {{accessToken}}
 
 {
@@ -91,20 +91,20 @@ authorization: {{accessToken}}
 GET {{url_dev}}/product/published/all
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6519c6772c83a181045432ee
+x-client-id: 652449fae10331a37dbb7e9e
 authorization: {{accessToken}}
 
 {
 }
 
 ### declare variable
-@product_id = 6521bc543dc805cd4f91d93e
+@product_id = 65244a52e10331a37dbb7eb3
 ### publish product by shop
 # @name publishProductByShop
 POST {{url_dev}}/product/publish/{{product_id}}
 Content-Type: application/json
 x-api-key: 89540ee863ddc282206c76ae86293c6c9e813e1f31244c0415a92842d9aacd060154457a3dd25d6b844428c96a42393ebc8c8815570e97a38dc275813aeb9943
-x-client-id: 6519c6772c83a181045432ee
+x-client-id: 652449fae10331a37dbb7e9e
 authorization: {{accessToken}}
 
 {
