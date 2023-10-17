@@ -5,12 +5,27 @@ const { promisify } = require("util");
 const {
   reservationInventory,
 } = require("../models/repositories/inventory.repo");
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({
+  url: "redis://localhost:6381",
+  password: "merritrade",
+});
+redisClient.connect().catch((error) => {
+  Logger.error(`[RedisEmitter] ${JSON.stringify(error)}`);
+  throw error;
+});
+// Listen for the 'connect' event to check if the connection is successful.
+redisClient.on("connect", () => {
+  console.log("Connected to Redis server");
+});
 
-const pexpire = promisify(redisClient.pexpire).bind(redisClient);
-const setnxAsync = promisify(redisClient.setnx).bind(redisClient);
-const delAsyncKey = promisify(redisClient.del).bind(redisClient);
+// Listen for the 'error' event to capture any connection errors.
+redisClient.on("error", (error) => {
+  console.error("Redis connection error: ", error);
+});
 
+const pexpire = promisify(redisClient.PEXPIRE).bind(redisClient);
+const setnxAsync = promisify(redisClient.SETNX).bind(redisClient);
+const delAsyncKey = promisify(redisClient.DEL).bind(redisClient);
 const acquireLock = async (productId, quantity, cardId) => {
   const key = `lock_v2023_${productId}`;
   const retryTimes = 10;
