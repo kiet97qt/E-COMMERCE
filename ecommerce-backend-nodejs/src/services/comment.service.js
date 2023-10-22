@@ -9,6 +9,7 @@ const {
 const {
   findAllProducts,
   getProductById,
+  findProduct,
 } = require("../models/repositories/product.repo");
 const { convertToObjectMongodb } = require("../utils");
 class CommentService {
@@ -125,6 +126,47 @@ class CommentService {
       });
 
     return comments;
+  }
+
+  static async deleteComment({ commentId, productId }) {
+    // check the product exists in the database
+    const foundProduct = await findProduct({ product_id: productId });
+
+    if (!foundProduct) throw new NotFoundError("product not found");
+    //1. Xac dinh gia tri left vs right of commentId
+    const comment = await Comment.findById(commentId);
+    if (!comment) throw new NotFoundError("Comment not found");
+    const leftValue = comment.comment_left;
+    const rightValue = comment.comment_right;
+    //2. tinh width
+    const width = rightValue - leftValue + 1;
+    //3. Xoa tat ca commentId con
+    await Comment.deleteMany({
+      comment_parent: convertToObjectMongodb(productId),
+      comment_left: { $gte: leftValue, $lte: rightValue },
+    });
+    //4. cap nhat gia tri left, right con lai
+    await Comment.updateMany(
+      {
+        comment_productId: convertToObjectMongodb(productId),
+        comment_right: { $gt: rightValue },
+      },
+      {
+        $inc: { comment_right: -width },
+      }
+    );
+
+    await Comment.updateMany(
+      {
+        comment_productId: convertToObjectMongodb(productId),
+        comment_left: { $gt: rightValue },
+      },
+      {
+        $inc: { comment_left: -width },
+      }
+    );
+
+    return true;
   }
 }
 
