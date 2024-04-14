@@ -17,6 +17,30 @@ services:
       driver: "json-file"
       options:
         max-size: "100m"
-
+  mongodb:
+    image: mongo
+    container_name: e-commerce-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: shopDEV
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo:/data/db
+    networks:
+      - network
+    restart: always
+  redis:
+    image: redis
+    container_name: e-commerce-redis
+    command: redis-server --requirepass e-commerce-dev
+    volumes:
+      - ./data/redis-socket/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis-socket/data:/data
+    networks:
+      - network
+    ports:
+      - "6381:6379"
 networks:
   network:

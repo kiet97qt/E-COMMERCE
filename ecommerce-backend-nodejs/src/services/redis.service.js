@@ -7,7 +7,7 @@ const {
 } = require("../models/repositories/inventory.repo");
 const redisClient = redis.createClient({
   url: "redis://localhost:6381",
-  password: "merritrade",
+  password: "e-commerce-dev",
 });
 redisClient.connect().catch((error) => {
   Logger.error(`[RedisEmitter] ${JSON.stringify(error)}`);
