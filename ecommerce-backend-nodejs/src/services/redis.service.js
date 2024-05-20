@@ -1,27 +1,13 @@
 "use strict";
 
-const redis = require("redis");
 const { promisify } = require("util");
 const {
   reservationInventory,
 } = require("../models/repositories/inventory.repo");
-const redisClient = redis.createClient({
-  url: "redis://localhost:6381",
-  password: "e-commerce-dev",
-});
-redisClient.connect().catch((error) => {
-  Logger.error(`[RedisEmitter] ${JSON.stringify(error)}`);
-  throw error;
-});
-// Listen for the 'connect' event to check if the connection is successful.
-redisClient.on("connect", () => {
-  console.log("Connected to Redis server");
-});
 
-// Listen for the 'error' event to capture any connection errors.
-redisClient.on("error", (error) => {
-  console.error("Redis connection error: ", error);
-});
+const { getRedis } = require("../dbs/init.redis");
+
+const { instanceConnect: redisClient } = getRedis();
 
 const pexpire = promisify(redisClient.PEXPIRE).bind(redisClient);
 const setnxAsync = promisify(redisClient.SETNX).bind(redisClient);

@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const { checkOverload } = require("./helpers/check.connect");
 const { v4: uuidv4 } = require("uuid");
 const { Logger } = require("./loggers/logger.util");
-
+const { initRedis } = require("./dbs/init.redis");
 // test common-lib
 const { NotificationCategory, Utils } = require("common-lib");
 console.log(Utils.HandleErrorDetail);
@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extends: true }));
 
 // init db
 require("./dbs/init.mongodb");
+initRedis();
 // checkOverload();
 
 app.use((req, res, next) => {
