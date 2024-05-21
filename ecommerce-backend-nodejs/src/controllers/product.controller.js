@@ -2,8 +2,38 @@
 
 const { SuccessResponse } = require("../core/success.response");
 const ProductService = require("../services/product.service");
+const { oneSku } = require("../services/sku.service");
+const { oneSpu } = require("../services/spu.service");
 
 class ProductController {
+  findOneSpu = async (req, res, next) => {
+    const { product_id } = req.query;
+    new SuccessResponse({
+      message: "product one",
+      metadata: await oneSpu({ spu_id: product_id }),
+    }).send(res);
+  };
+
+  findOneSku = async (req, res, next) => {
+    const { sku_id, product_id } = req.query;
+    new SuccessResponse({
+      message: "get one sku",
+      metadata: await oneSku({ sku_id, product_id }),
+    }).send(res);
+  };
+
+  createSpu = async (req, res, next) => {
+    const spu = await newSpu({
+      ...req.body,
+      product_shop: req.user.userId,
+    });
+
+    new SuccessResponse({
+      message: "Success  create spu",
+      metadata: spu,
+    }).send(res);
+  };
+
   createProduct = async (req, res, next) => {
     new SuccessResponse({
       message: "Create new Product success!",
